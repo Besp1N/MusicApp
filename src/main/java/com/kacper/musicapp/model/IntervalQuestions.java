@@ -30,5 +30,5 @@ public class IntervalQuestions
     private String ans3;
 
     @Column(nullable = false, name = "ans4")
-    private String ans;
+    private String ans4;
 }
