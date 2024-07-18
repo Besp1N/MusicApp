@@ -1,5 +1,6 @@
 package com.kacper.musicapp.interval;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class IntervalController
     }
 
     @PostMapping("/")
-    public ResponseEntity<Interval> addInterval(@RequestBody IntervalRequestDTO request) {
+    public ResponseEntity<Interval> addInterval(@Valid @RequestBody IntervalRequestDTO request) {
         return intervalService.addInterval(request);
     }
 

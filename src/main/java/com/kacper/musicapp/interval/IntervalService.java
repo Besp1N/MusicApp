@@ -41,7 +41,7 @@ public class IntervalService
         try {
             intervalRepository.save(interval);
         } catch (Exception e) {
-            throw new DatabaseSaveException("Failed to save interval");
+            throw new DatabaseSaveException("Field to save");
         }
 
         return new ResponseEntity<>(interval, HttpStatus.CREATED);
