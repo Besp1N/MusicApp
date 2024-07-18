@@ -1,33 +1,55 @@
 package com.kacper.musicapp.interval;
 
+import com.kacper.musicapp.exception.DatabaseSaveException;
+import com.kacper.musicapp.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IntervalService
 {
     private final IntervalRepository intervalRepository;
+    private final IntervalMapper intervalMapper;
 
-    public IntervalService(IntervalRepository intervalRepository) {
+    public IntervalService(
+            IntervalRepository intervalRepository,
+            IntervalMapper intervalMapper
+    ) {
         this.intervalRepository = intervalRepository;
+        this.intervalMapper = intervalMapper;
     }
 
-    public ResponseEntity<List<Interval>> getAllIntervals() {
-        return new ResponseEntity<>(intervalRepository.findAll(), HttpStatus.OK);
+    public List<IntervalResponseDTO> getAllIntervals() {
+        return intervalRepository.findAll()
+                .stream()
+                .map(intervalMapper)
+                .collect(Collectors.toList());
     }
 
-    public ResponseEntity<Interval> addInterval(Interval request) {
+    public ResponseEntity<Interval> addInterval(IntervalRequestDTO request) {
         Interval interval = Interval.builder()
-                .intervalName(request.getIntervalName())
-                .firstNote(request.getFirstNote())
-                .secondNote(request.getSecondNote())
-                .difficulty(request.getDifficulty())
+                .intervalName(request.intervalName())
+                .firstNote(request.firstNote())
+                .secondNote(request.secondNote())
+                .difficulty(request.difficulty())
                 .build();
 
-        Interval intervalDB = intervalRepository.save(interval);
-        return new ResponseEntity<>(intervalDB, HttpStatus.CREATED);
+        try {
+            intervalRepository.save(interval);
+        } catch (Exception e) {
+            throw new DatabaseSaveException("Failed to save interval");
+        }
+
+        return new ResponseEntity<>(interval, HttpStatus.CREATED);
+    }
+
+    public IntervalResponseDTO getIntervalById(Integer id) {
+        return intervalRepository.findById(id)
+                .map(intervalMapper)
+                .orElseThrow(() -> new ResourceNotFoundException("Interval not found"));
     }
 }

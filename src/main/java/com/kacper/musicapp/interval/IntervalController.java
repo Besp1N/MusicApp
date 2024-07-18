@@ -16,12 +16,17 @@ public class IntervalController
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Interval>> getAllIntervals() {
-        return ResponseEntity.ok(intervalService.getAllIntervals().getBody());
+    public List<IntervalResponseDTO> getAllIntervals() {
+        return intervalService.getAllIntervals();
     }
 
     @PostMapping("/")
-    public ResponseEntity<Interval> addInterval(@RequestBody Interval request) {
-        return ResponseEntity.ok(intervalService.addInterval(request).getBody());
+    public ResponseEntity<Interval> addInterval(@RequestBody IntervalRequestDTO request) {
+        return intervalService.addInterval(request);
+    }
+
+    @GetMapping("/{id}")
+    public IntervalResponseDTO getIntervalById(@PathVariable Integer id) {
+        return intervalService.getIntervalById(id);
     }
 }

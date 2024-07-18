@@ -8,7 +8,12 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "intervals")
+@Table(
+        name = "intervals",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"first_note", "second_note"})
+        }
+)
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -19,26 +24,26 @@ public class Interval
     private Integer id;
 
     @Column(
-            name = "interval_name",
-            nullable = false
+            nullable = false,
+            name = "interval_name"
     )
     private String intervalName;
 
     @Column(
-            name = "first_note",
-            nullable = false
+            nullable = false,
+            name = "first_note"
     )
     private String firstNote;
 
     @Column(
-            name = "second_note",
-            nullable = false
+            nullable = false,
+            name = "second_note"
     )
     private String secondNote;
 
     @Column(
-            name = "difficulty",
-            nullable = false
+            nullable = false,
+            name = "difficulty"
     )
     private String difficulty;
 }
