@@ -1,4 +1,4 @@
-package com.kacper.musicapp.model.enums;
+package com.kacper.musicapp.interval;
 
 public enum Intervals
 {

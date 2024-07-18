@@ -1,5 +1,6 @@
-package com.kacper.musicapp.model;
+package com.kacper.musicapp.intervalQuestion;
 
+import com.kacper.musicapp.interval.Interval;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "questions")
 @AllArgsConstructor
 @NoArgsConstructor
-public class IntervalQuestions
+public class IntervalQuestion
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +19,7 @@ public class IntervalQuestions
 
     @OneToOne
     @JoinColumn(name = "interval_id", referencedColumnName = "id", nullable = false)
-    private Intervals interval;
+    private Interval interval;
 
     @Column(nullable = false, name = "ans1")
     private String ans1;
