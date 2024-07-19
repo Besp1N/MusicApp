@@ -1,6 +1,7 @@
 package com.kacper.musicapp.intervalQuestion;
 
 import com.kacper.musicapp.interval.Interval;
+import com.kacper.musicapp.intervalQuiz.IntervalQuiz;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -46,4 +47,8 @@ public class IntervalQuestion
 
     @Column(name = "option4")
     private String option4;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_id")
+    private IntervalQuiz quiz;
 }
