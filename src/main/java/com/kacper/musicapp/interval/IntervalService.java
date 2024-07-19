@@ -36,6 +36,7 @@ public class IntervalService
                 .firstNote(request.firstNote())
                 .secondNote(request.secondNote())
                 .difficulty(request.difficulty())
+                .filePath(request.filePath())
                 .build();
 
         try {
@@ -51,5 +52,14 @@ public class IntervalService
         return intervalRepository.findById(id)
                 .map(intervalMapper)
                 .orElseThrow(() -> new ResourceNotFoundException("Interval not found"));
+    }
+
+    public ResponseEntity<Interval> deleteInterval(Integer id) {
+        Interval interval = intervalRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Interval not found"));
+
+        intervalRepository.delete(interval);
+
+        return new ResponseEntity<>(interval, HttpStatus.OK);
     }
 }

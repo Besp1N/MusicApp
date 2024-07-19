@@ -13,6 +13,9 @@ public record IntervalRequestDTO(
         String secondNote,
 
         @NotBlank(message = "Difficulty cannot be blank")
-        String difficulty
+        String difficulty,
+
+        @NotBlank(message = "File path cannot be blank")
+        String filePath
 ) {
 }

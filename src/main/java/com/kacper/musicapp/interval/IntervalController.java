@@ -22,12 +22,20 @@ public class IntervalController
     }
 
     @PostMapping("/")
-    public ResponseEntity<Interval> addInterval(@Valid @RequestBody IntervalRequestDTO request) {
+    public ResponseEntity<Interval> addInterval(
+            @Valid
+            @RequestBody IntervalRequestDTO request
+    ) {
         return intervalService.addInterval(request);
     }
 
     @GetMapping("/{id}")
     public IntervalResponseDTO getIntervalById(@PathVariable Integer id) {
         return intervalService.getIntervalById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Interval> deleteInterval(@PathVariable Integer id) {
+        return intervalService.deleteInterval(id);
     }
 }

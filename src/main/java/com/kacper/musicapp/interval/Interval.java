@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 public class Interval
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(
@@ -46,4 +46,10 @@ public class Interval
             name = "difficulty"
     )
     private String difficulty;
+
+    @Column(
+            nullable = false,
+            name = "file_path"
+    )
+    private String filePath;
 }

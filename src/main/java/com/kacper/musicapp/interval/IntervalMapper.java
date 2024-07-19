@@ -13,7 +13,8 @@ public class IntervalMapper implements Function<Interval, IntervalResponseDTO>
                 interval.getId(),
                 interval.getFirstNote(),
                 interval.getSecondNote(),
-                interval.getDifficulty()
+                interval.getDifficulty(),
+                interval.getFilePath()
         );
     }
 }

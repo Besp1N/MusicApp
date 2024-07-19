@@ -3,33 +3,47 @@ package com.kacper.musicapp.intervalQuestion;
 import com.kacper.musicapp.interval.Interval;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "questions")
+@Table(name = "interval_questions")
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class IntervalQuestion
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne
-    @JoinColumn(name = "interval_id", referencedColumnName = "id", nullable = false)
+    @OneToOne(cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "interval_id", referencedColumnName = "id")
     private Interval interval;
 
-    @Column(nullable = false, name = "ans1")
-    private String ans1;
+    @Column(
+            nullable = false,
+            name = "difficulty"
+    )
+    private String difficulty;
 
-    @Column(nullable = false, name = "ans2")
-    private String ans2;
+    @Column(
+            nullable = false,
+            name = "option1"
+    )
+    private String option1;
 
-    @Column(nullable = false, name = "ans3")
-    private String ans3;
+    @Column(
+            nullable = false,
+            name = "option2"
+    )
+    private String option2;
 
-    @Column(nullable = false, name = "ans4")
-    private String ans4;
+    @Column(name = "option3")
+    private String option3;
+
+    @Column(name = "option4")
+    private String option4;
 }

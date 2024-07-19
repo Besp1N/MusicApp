@@ -4,6 +4,7 @@ public record IntervalResponseDTO(
         Integer id,
         String firstNote,
         String secondNote,
-        String difficulty
+        String difficulty,
+        String filePath
 ) {
 }
