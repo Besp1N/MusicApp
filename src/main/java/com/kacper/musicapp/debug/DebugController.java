@@ -1,4 +1,4 @@
-package com.kacper.musicapp.controller;
+package com.kacper.musicapp.debug;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,6 @@ public class DebugController
 {
     @GetMapping("/test")
     public String test() {
-        return "Test";
+        return "test";
     }
-
 }
