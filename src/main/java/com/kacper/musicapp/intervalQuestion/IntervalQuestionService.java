@@ -3,6 +3,7 @@ package com.kacper.musicapp.intervalQuestion;
 import com.kacper.musicapp.exception.ResourceNotFoundException;
 import com.kacper.musicapp.interval.Interval;
 import com.kacper.musicapp.interval.IntervalRepository;
+import com.kacper.musicapp.interval.IntervalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,16 @@ public class IntervalQuestionService
     private final IntervalQuestionRepository intervalQuestionRepository;
     private final IntervalQuestionMapper intervalQuestionMapper;
     private final IntervalRepository intervalRepository;
+    private final IntervalService intervalService;
 
     public IntervalQuestionService(
             IntervalQuestionRepository intervalQuestionRepository,
             IntervalQuestionMapper intervalQuestionMapper,
-            IntervalRepository intervalRepository) {
+            IntervalRepository intervalRepository, IntervalService intervalService) {
         this.intervalQuestionRepository = intervalQuestionRepository;
         this.intervalQuestionMapper = intervalQuestionMapper;
         this.intervalRepository = intervalRepository;
+        this.intervalService = intervalService;
     }
 
     public List<IntervalQuestionResponseDTO> findAllIntervalQuestions() {
@@ -35,14 +38,12 @@ public class IntervalQuestionService
     }
 
     public ResponseEntity<IntervalQuestion> addIntervalQuestion(IntervalQuestionRequestDTO intervalQuestionRequestDTO) {
-        Integer intervalId = intervalQuestionRequestDTO.intervalId();
-        Interval interval = intervalRepository.findById(intervalId)
-                .orElseThrow(() -> new ResourceNotFoundException("Interval not found"));
+        Interval interval = intervalService.addInterval(intervalQuestionRequestDTO.interval()).getBody();
 
         IntervalQuestion intervalQuestion = IntervalQuestion.builder()
                 .interval(interval)
                 .difficulty(intervalQuestionRequestDTO.difficulty())
-                .option1(interval.getIntervalName())
+                .option1(intervalQuestionRequestDTO.option1())
                 .option2(intervalQuestionRequestDTO.option2())
                 .option3(intervalQuestionRequestDTO.option3())
                 .option4(intervalQuestionRequestDTO.option4())

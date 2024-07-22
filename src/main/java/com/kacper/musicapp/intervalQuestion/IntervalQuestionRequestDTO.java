@@ -1,7 +1,9 @@
 package com.kacper.musicapp.intervalQuestion;
 
+import com.kacper.musicapp.interval.IntervalRequestDTO;
+
 public record IntervalQuestionRequestDTO(
-        Integer intervalId,
+        IntervalRequestDTO interval,
         String difficulty,
         String option1,
         String option2,

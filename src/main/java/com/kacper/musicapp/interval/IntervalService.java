@@ -38,7 +38,6 @@ public class IntervalService
                 .difficulty(request.difficulty())
                 .filePath(request.filePath())
                 .build();
-
         try {
             intervalRepository.save(interval);
         } catch (Exception e) {
