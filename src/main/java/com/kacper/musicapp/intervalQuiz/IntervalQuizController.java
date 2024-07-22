@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class IntervalQuizController
 {
     @PostMapping("/")
-    public IntervalQuiz addQuiz() {
+    public IntervalQuiz addIntervalQuiz() {
         return null;
     }
 

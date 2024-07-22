@@ -3,8 +3,6 @@ package com.kacper.musicapp.intervalQuestion;
 import com.kacper.musicapp.exception.ResourceNotFoundException;
 import com.kacper.musicapp.interval.Interval;
 import com.kacper.musicapp.interval.IntervalRepository;
-import com.kacper.musicapp.interval.IntervalResponseDTO;
-import com.kacper.musicapp.interval.IntervalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
