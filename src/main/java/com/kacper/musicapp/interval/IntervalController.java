@@ -22,7 +22,7 @@ public class IntervalController
     }
 
     @PostMapping("/")
-    public ResponseEntity<Interval> addInterval(
+    public Interval addInterval(
             @Valid
             @RequestBody IntervalRequestDTO request
     ) {

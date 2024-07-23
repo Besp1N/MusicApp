@@ -19,8 +19,18 @@ public class IntervalQuizController
     }
 
     @PostMapping("/")
-    public IntervalQuiz addIntervalQuiz(@RequestBody IntervalQuizRequestDAO intervalQuizRequestDAO) {
-        return intervalQuizService.addIntervalQuiz(intervalQuizRequestDAO);
+    public IntervalQuiz addEmptyIntervalQuiz(@RequestBody IntervalQuizRequestDAO intervalQuizRequestDAO) {
+        return intervalQuizService.addEmptyIntervalQuiz(intervalQuizRequestDAO);
     }
+
+    @PatchMapping("/{quizId}/questions")
+    public IntervalQuiz addQuestions(
+            @PathVariable Integer quizId,
+            @RequestBody IntervalQuizAddQuestionsRequestDAO intervalQuizAddQuestionsRequestDAO
+    ) {
+        return intervalQuizService.addQuestions(quizId, intervalQuizAddQuestionsRequestDAO);
+
+    }
+
 
 }

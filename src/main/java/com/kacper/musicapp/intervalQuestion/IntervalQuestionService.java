@@ -44,30 +44,23 @@ public class IntervalQuestionService
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<IntervalQuestion> addIntervalQuestion(
+    public IntervalQuestion addIntervalQuestion(
             IntervalQuestionRequestDTO intervalQuestionRequestDTO,
-            Optional<Integer> quizId
+            Integer quizId
     ) {
-        Interval interval = intervalService.addInterval(intervalQuestionRequestDTO.interval()).getBody();
-
-        IntervalQuiz quiz = null;
-        if (quizId.isPresent()) {
-            quiz = intervalQuizRepository.findById(quizId.get())
-                    .orElseThrow(() -> new ResourceNotFoundException("Interval quiz not found with id: " + quizId.get()));
-        }
-
+        Interval interval = intervalService.addInterval(intervalQuestionRequestDTO.interval());
         IntervalQuestion intervalQuestion = IntervalQuestion.builder()
                 .interval(interval)
-                .quiz(quiz)
                 .difficulty(intervalQuestionRequestDTO.difficulty())
+                .quiz(intervalQuizRepository.findById(quizId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Quiz not found")))
                 .option1(intervalQuestionRequestDTO.option1())
                 .option2(intervalQuestionRequestDTO.option2())
                 .option3(intervalQuestionRequestDTO.option3())
                 .option4(intervalQuestionRequestDTO.option4())
                 .build();
 
-        IntervalQuestion savedQuestion = intervalQuestionRepository.save(intervalQuestion);
-        return new ResponseEntity<>(savedQuestion, HttpStatus.CREATED);
+        return intervalQuestionRepository.save(intervalQuestion);
     }
 
     public IntervalQuestion getIntervalQuestionById(Integer id) {

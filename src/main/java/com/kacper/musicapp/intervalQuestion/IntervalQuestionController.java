@@ -23,14 +23,6 @@ public class IntervalQuestionController
         return intervalQuestionService.findAllIntervalQuestions();
     }
 
-    @PostMapping("/")
-    public ResponseEntity<IntervalQuestion> addIntervalQuestion(
-           @Valid
-           @RequestBody IntervalQuestionRequestDTO intervalQuestionRequestDTO,
-              @RequestParam(required = false) Integer quizId
-    ) {
-        return intervalQuestionService.addIntervalQuestion(intervalQuestionRequestDTO, Optional.ofNullable(quizId));
-    }
 
     @PostMapping("/checkAnswer")
     public Boolean checkAnswer(@RequestBody AnswerRequest answerRequest) {
