@@ -1,5 +1,6 @@
 package com.kacper.musicapp.intervalQuestion;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kacper.musicapp.interval.Interval;
 import com.kacper.musicapp.intervalQuiz.IntervalQuiz;
 import jakarta.persistence.*;
@@ -50,5 +51,6 @@ public class IntervalQuestion
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
+    @JsonIgnore
     private IntervalQuiz quiz;
 }

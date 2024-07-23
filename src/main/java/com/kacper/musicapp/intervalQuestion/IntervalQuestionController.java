@@ -1,10 +1,12 @@
 package com.kacper.musicapp.intervalQuestion;
 
+import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/intervalQuestion")
@@ -23,9 +25,11 @@ public class IntervalQuestionController
 
     @PostMapping("/")
     public ResponseEntity<IntervalQuestion> addIntervalQuestion(
-            @RequestBody IntervalQuestionRequestDTO intervalQuestionRequestDTO
+           @Valid
+           @RequestBody IntervalQuestionRequestDTO intervalQuestionRequestDTO,
+              @RequestParam(required = false) Integer quizId
     ) {
-        return intervalQuestionService.addIntervalQuestion(intervalQuestionRequestDTO);
+        return intervalQuestionService.addIntervalQuestion(intervalQuestionRequestDTO, Optional.ofNullable(quizId));
     }
 
     @PostMapping("/checkAnswer")

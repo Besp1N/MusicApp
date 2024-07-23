@@ -23,7 +23,9 @@ public class IntervalQuiz
 
     private String name;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String difficulty;
+
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<IntervalQuestion> questions;
 
 
