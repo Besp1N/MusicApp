@@ -61,11 +61,17 @@ public class IntervalQuestion
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IntervalQuestion that = (IntervalQuestion) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(difficulty, that.difficulty) &&
+                Objects.equals(option1, that.option1) &&
+                Objects.equals(option2, that.option2) &&
+                Objects.equals(option3, that.option3) &&
+                Objects.equals(option4, that.option4);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, difficulty, option1, option2, option3, option4);
     }
+
 }

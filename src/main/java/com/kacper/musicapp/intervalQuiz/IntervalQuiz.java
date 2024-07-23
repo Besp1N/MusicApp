@@ -40,13 +40,14 @@ public class IntervalQuiz
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         IntervalQuiz that = (IntervalQuiz) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(difficulty, that.difficulty);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, name, difficulty);
     }
-
 
 }
