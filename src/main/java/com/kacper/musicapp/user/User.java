@@ -2,6 +2,7 @@ package com.kacper.musicapp.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@Builder
 @Entity
 @Table(name = "users")
 @AllArgsConstructor
@@ -36,7 +38,9 @@ public class User implements UserDetails
 
     private Integer age;
 
-    private Double activationCode;
+    private Integer activationCode;
+
+    private boolean enabled = false;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -67,6 +71,6 @@ public class User implements UserDetails
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }
