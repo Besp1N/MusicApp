@@ -1,12 +1,17 @@
 package com.kacper.musicapp.intervalQuestion;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kacper.musicapp.interval.Interval;
 import com.kacper.musicapp.intervalQuiz.IntervalQuiz;
+import com.kacper.musicapp.userAnswer.UserAnswer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -50,5 +55,28 @@ public class IntervalQuestion
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_id")
+    @JsonIgnore
     private IntervalQuiz quiz;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserAnswer> userAnswers;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntervalQuestion that = (IntervalQuestion) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(difficulty, that.difficulty) &&
+                Objects.equals(option1, that.option1) &&
+                Objects.equals(option2, that.option2) &&
+                Objects.equals(option3, that.option3) &&
+                Objects.equals(option4, that.option4);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, difficulty, option1, option2, option3, option4);
+    }
+
 }

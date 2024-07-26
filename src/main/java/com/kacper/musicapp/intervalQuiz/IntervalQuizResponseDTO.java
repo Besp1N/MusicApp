@@ -1,6 +1,6 @@
 package com.kacper.musicapp.intervalQuiz;
 
-public record IntervalQuizRequestDTO(
-
+public record IntervalQuizResponseDTO(
+    
 ) {
 }

@@ -30,7 +30,7 @@ public class IntervalService
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<Interval> addInterval(IntervalRequestDTO request) {
+    public Interval addInterval(IntervalRequestDTO request) {
         Interval interval = Interval.builder()
                 .intervalName(request.intervalName())
                 .firstNote(request.firstNote())
@@ -44,7 +44,7 @@ public class IntervalService
             throw new DatabaseSaveException("Field to save");
         }
 
-        return new ResponseEntity<>(interval, HttpStatus.CREATED);
+        return interval;
     }
 
     public IntervalResponseDTO getIntervalById(Integer id) {
