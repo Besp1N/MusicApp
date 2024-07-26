@@ -3,12 +3,14 @@ package com.kacper.musicapp.intervalQuestion;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kacper.musicapp.interval.Interval;
 import com.kacper.musicapp.intervalQuiz.IntervalQuiz;
+import com.kacper.musicapp.userAnswer.UserAnswer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Objects;
 
 @Data
@@ -55,6 +57,9 @@ public class IntervalQuestion
     @JoinColumn(name = "quiz_id")
     @JsonIgnore
     private IntervalQuiz quiz;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserAnswer> userAnswers;
 
     @Override
     public boolean equals(Object o) {

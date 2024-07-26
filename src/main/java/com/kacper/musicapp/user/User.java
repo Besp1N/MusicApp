@@ -1,5 +1,6 @@
 package com.kacper.musicapp.user;
 
+import com.kacper.musicapp.userAnswer.UserAnswer;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,6 +43,9 @@ public class User implements UserDetails
 
     private boolean enabled = false;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserAnswer> userAnswers;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(
@@ -71,6 +75,6 @@ public class User implements UserDetails
 
     @Override
     public boolean isEnabled() {
-        return enabled;
+        return true;
     }
 }
