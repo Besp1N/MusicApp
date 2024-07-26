@@ -6,6 +6,7 @@ import com.kacper.musicapp.interval.IntervalRepository;
 import com.kacper.musicapp.interval.IntervalService;
 import com.kacper.musicapp.intervalQuiz.IntervalQuiz;
 import com.kacper.musicapp.intervalQuiz.IntervalQuizRepository;
+import com.kacper.musicapp.utils.Debug;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
