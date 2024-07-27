@@ -43,7 +43,7 @@ public class User implements UserDetails
 
     private boolean enabled = false;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<UserAnswer> userAnswers;
 
     @Override
