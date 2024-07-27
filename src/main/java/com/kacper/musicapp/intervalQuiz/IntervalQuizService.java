@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -17,13 +18,16 @@ public class IntervalQuizService
 {
     private final IntervalQuizRepository intervalQuizRepository;
     private final IntervalQuestionService intervalQuestionService;
+    private final IntervalQuizShowMapper intervalQuizShowMapper;
 
     public IntervalQuizService(
             IntervalQuizRepository intervalQuizRepository,
-            IntervalQuestionService intervalQuestionService
+            IntervalQuestionService intervalQuestionService,
+            IntervalQuizShowMapper intervalQuizShowMapper
     ) {
         this.intervalQuizRepository = intervalQuizRepository;
         this.intervalQuestionService = intervalQuestionService;
+        this.intervalQuizShowMapper = intervalQuizShowMapper;
     }
 
     public IntervalQuiz addEmptyIntervalQuiz(IntervalQuizRequestDAO intervalQuizRequestDAO) {
@@ -50,5 +54,12 @@ public class IntervalQuizService
             });
 
             return intervalQuizRepository.save(quiz);
+    }
+
+    public List<IntervalQuizShowResponseDTO> getIntervalQuizzes() {
+        return intervalQuizRepository.findAll()
+                .stream()
+                .map(intervalQuizShowMapper)
+                .collect(Collectors.toList());
     }
 }

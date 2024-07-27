@@ -26,6 +26,12 @@ public class IntervalQuestionController
         return intervalQuestionService.findAllIntervalQuestions();
     }
 
+    @GetMapping("test")
+    public String test() {
+        Debug.dd(UserUtils.getUser());
+        return "test";
+    }
+
     @PostMapping("/checkAnswer")
     public Boolean checkAnswer(@RequestBody AnswerRequest answerRequest) {
         return intervalQuestionService.checkAnswer(answerRequest);
