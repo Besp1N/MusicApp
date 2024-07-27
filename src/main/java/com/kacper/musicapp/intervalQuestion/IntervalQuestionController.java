@@ -1,9 +1,11 @@
 package com.kacper.musicapp.intervalQuestion;
 
 import com.kacper.musicapp.utils.Debug;
+import com.kacper.musicapp.utils.UserUtils;
 import jakarta.validation.Valid;
 import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class IntervalQuestionController
         return intervalQuestionService.findAllIntervalQuestions();
     }
 
+    @GetMapping("test")
+    public String test() {
+        Debug.dd(UserUtils.getUser());
+        return "test";
+    }
 
     @PostMapping("/checkAnswer")
     public Boolean checkAnswer(@RequestBody AnswerRequest answerRequest) {

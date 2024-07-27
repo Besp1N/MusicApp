@@ -37,6 +37,5 @@ public class UserService
     private Integer generateActivationCode() {
         SecureRandom random = new SecureRandom();
         return 1000 + random.nextInt(9000);
-
     }
 }

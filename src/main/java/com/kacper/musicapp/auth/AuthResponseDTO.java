@@ -1,5 +1,8 @@
 package com.kacper.musicapp.auth;
 
+import lombok.Builder;
+
+@Builder
 public record AuthResponseDTO(
     String token,
     String email,

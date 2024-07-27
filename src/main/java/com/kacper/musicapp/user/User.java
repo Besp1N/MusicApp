@@ -43,7 +43,8 @@ public class User implements UserDetails
 
     private boolean enabled = false;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Replace with Lazy in future
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<UserAnswer> userAnswers;
 
     @Override
@@ -73,6 +74,7 @@ public class User implements UserDetails
         return true;
     }
 
+    // Replace with isEnabled in future
     @Override
     public boolean isEnabled() {
         return true;

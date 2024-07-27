@@ -23,6 +23,11 @@ public class IntervalQuizController
         return intervalQuizService.addEmptyIntervalQuiz(intervalQuizRequestDAO);
     }
 
+    @GetMapping("/")
+    public List<IntervalQuizShowResponseDTO> getIntervalQuizzes() {
+        return intervalQuizService.getIntervalQuizzes();
+    }
+
     @PatchMapping("/{quizId}/questions")
     public IntervalQuiz addQuestions(
             @PathVariable Integer quizId,
