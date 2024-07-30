@@ -12,7 +12,7 @@ public class IntervalQuestionMapper implements Function<IntervalQuestion, Interv
     public IntervalQuestionResponseDTO apply(IntervalQuestion intervalQuestion) {
         return new IntervalQuestionResponseDTO(
                 intervalQuestion.getId(),
-                intervalQuestion.getInterval().getId(),
+                intervalQuestion.getInterval(),
                 intervalQuestion.getDifficulty(),
                 intervalQuestion.getOption1(),
                 intervalQuestion.getOption2(),

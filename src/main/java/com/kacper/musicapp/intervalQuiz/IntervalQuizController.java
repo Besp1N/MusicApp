@@ -1,6 +1,5 @@
 package com.kacper.musicapp.intervalQuiz;
 
-import com.kacper.musicapp.intervalQuestion.IntervalQuestion;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +18,8 @@ public class IntervalQuizController
     }
 
     @PostMapping("/")
-    public IntervalQuiz addEmptyIntervalQuiz(@RequestBody IntervalQuizRequestDAO intervalQuizRequestDAO) {
-        return intervalQuizService.addEmptyIntervalQuiz(intervalQuizRequestDAO);
+    public IntervalQuiz addEmptyIntervalQuiz(@RequestBody IntervalQuizRequestDTO intervalQuizRequestDTO) {
+        return intervalQuizService.addEmptyIntervalQuiz(intervalQuizRequestDTO);
     }
 
     @GetMapping("/")

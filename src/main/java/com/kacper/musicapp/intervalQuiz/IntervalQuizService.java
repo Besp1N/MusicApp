@@ -2,14 +2,12 @@ package com.kacper.musicapp.intervalQuiz;
 
 import com.kacper.musicapp.exception.ResourceNotFoundException;
 import com.kacper.musicapp.intervalQuestion.IntervalQuestion;
-import com.kacper.musicapp.intervalQuestion.IntervalQuestionRequestDTO;
+import com.kacper.musicapp.intervalQuestion.IntervalQuestionMapper;
 import com.kacper.musicapp.intervalQuestion.IntervalQuestionService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -19,21 +17,24 @@ public class IntervalQuizService
     private final IntervalQuizRepository intervalQuizRepository;
     private final IntervalQuestionService intervalQuestionService;
     private final IntervalQuizShowMapper intervalQuizShowMapper;
+    private final IntervalQuestionMapper intervalQuestionMapper;
 
     public IntervalQuizService(
             IntervalQuizRepository intervalQuizRepository,
             IntervalQuestionService intervalQuestionService,
-            IntervalQuizShowMapper intervalQuizShowMapper
+            IntervalQuizShowMapper intervalQuizShowMapper,
+            IntervalQuestionMapper intervalQuestionMapper
     ) {
         this.intervalQuizRepository = intervalQuizRepository;
         this.intervalQuestionService = intervalQuestionService;
         this.intervalQuizShowMapper = intervalQuizShowMapper;
+        this.intervalQuestionMapper = intervalQuestionMapper;
     }
 
-    public IntervalQuiz addEmptyIntervalQuiz(IntervalQuizRequestDAO intervalQuizRequestDAO) {
+    public IntervalQuiz addEmptyIntervalQuiz(IntervalQuizRequestDTO intervalQuizRequestDTO) {
         IntervalQuiz intervalQuiz = IntervalQuiz.builder()
-                .name(intervalQuizRequestDAO.name())
-                .difficulty(intervalQuizRequestDAO.difficulty())
+                .name(intervalQuizRequestDTO.name())
+                .difficulty(intervalQuizRequestDTO.difficulty())
                 .questions(new HashSet<>())
                 .build();
 
@@ -61,5 +62,19 @@ public class IntervalQuizService
                 .stream()
                 .map(intervalQuizShowMapper)
                 .collect(Collectors.toList());
+    }
+
+    public IntervalQuizResponseDTO getIntervalQuizById(Integer quizId) {
+        IntervalQuiz quiz = intervalQuizRepository.findById(quizId)
+                .orElseThrow(() -> new ResourceNotFoundException("Quiz not found"));
+
+        return IntervalQuizResponseDTO.builder()
+                .name(quiz.getName())
+                .difficulty(quiz.getDifficulty())
+                .questions(quiz.getQuestions()
+                        .stream()
+                        .map(intervalQuestionMapper)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }
