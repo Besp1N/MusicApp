@@ -27,14 +27,23 @@ public class IntervalQuizController
         return intervalQuizService.getIntervalQuizzes();
     }
 
+    @GetMapping("/{quizId}")
+    public IntervalQuizResponseDTO getIntervalQuizById(
+            @PathVariable Integer quizId
+    ) {
+        return intervalQuizService.getIntervalQuizById(quizId);
+
+    }
+
     @PatchMapping("/{quizId}/questions")
     public IntervalQuiz addQuestions(
             @PathVariable Integer quizId,
             @RequestBody IntervalQuizAddQuestionsRequestDAO intervalQuizAddQuestionsRequestDAO
     ) {
         return intervalQuizService.addQuestions(quizId, intervalQuizAddQuestionsRequestDAO);
-
     }
+
+
 
 
 }
