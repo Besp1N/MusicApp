@@ -78,7 +78,6 @@ public class IntervalQuestionService
         }
 
         String correctAnswer = intervalQuestion.get().getInterval().getIntervalName();
-
         return correctAnswer.equals(answerRequest.answer());
     }
 }

@@ -1,5 +1,6 @@
 package com.kacper.musicapp.userAnswer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kacper.musicapp.intervalQuestion.IntervalQuestion;
 import com.kacper.musicapp.user.User;
 import jakarta.persistence.*;
@@ -22,10 +23,12 @@ public class UserAnswer
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private IntervalQuestion question;
