@@ -73,9 +73,9 @@ public class User implements UserDetails
         return true;
     }
 
-    // Replace with isEnabled in future
+
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

@@ -1,6 +1,10 @@
 package com.kacper.musicapp.auth;
 
+import com.kacper.musicapp.exception.InvalidCredentialsException;
+import com.kacper.musicapp.exception.ResourceNotFoundException;
+import com.kacper.musicapp.exception.UserNotEnabledException;
 import com.kacper.musicapp.jwt.JWTService;
+import com.kacper.musicapp.mail.MailService;
 import com.kacper.musicapp.user.User;
 import com.kacper.musicapp.user.UserRepository;
 import com.kacper.musicapp.utils.Debug;
@@ -9,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.AuthenticationException;
 import java.security.SecureRandom;
 
 @Service
@@ -19,13 +24,22 @@ public class AuthService
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    private final MailService mailService;
 
-    public AuthService(UserRepository userRepository, AuthResponseMapper authResponseMapper, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTService jwtService) {
+    public AuthService(
+            UserRepository userRepository,
+            AuthResponseMapper authResponseMapper,
+            PasswordEncoder passwordEncoder,
+            AuthenticationManager authenticationManager,
+            JWTService jwtService,
+            MailService mailService
+    ) {
         this.userRepository = userRepository;
         this.authResponseMapper = authResponseMapper;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.mailService = mailService;
     }
 
     public AuthResponseDTO register(AuthRequestDTO authRequestDTO) {
@@ -41,25 +55,49 @@ public class AuthService
                 .build();
 
         User savedUser = userRepository.save(user);
+
+        mailService.sendActivationCode(savedUser.getEmail(), savedUser.getActivationCode());
         return authResponseMapper.apply(savedUser);
     }
 
     public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
-        authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.email(), authRequestDTO.password()));
-        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow();
-        String token = jwtService.generateToken(user);
+        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow(
+                () -> new ResourceNotFoundException("User not found"));
 
+        if (!user.isEnabled()) {
+            throw new UserNotEnabledException("Verify your email");
+        }
+
+        try {
+            authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.email(), authRequestDTO.password()));
+        } catch (Exception e) {
+            throw new InvalidCredentialsException("Invalid credentials");
+        }
+
+        String token = jwtService.generateToken(user);
         return AuthResponseDTO.builder()
                 .email(user.getEmail())
                 .token(token)
                 .build();
     }
 
+    public String activate(ActivationRequest activationRequest) {
+        User user = userRepository.findByEmail(activationRequest.email()).orElseThrow();
 
+        if (user.getActivationCode().equals(activationRequest.activationCode())) {
+            user.setEnabled(true);
+            userRepository.save(user);
+            return "User activated";
+        }
+
+        return "Invalid activation code";
+    }
 
     private Integer generateActivationCode() {
         SecureRandom random = new SecureRandom();
         return 1000 + random.nextInt(9000);
     }
+
+
 }

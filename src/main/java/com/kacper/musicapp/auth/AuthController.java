@@ -1,5 +1,7 @@
 package com.kacper.musicapp.auth;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,5 +25,10 @@ public class AuthController
     @PostMapping("/login")
     public AuthResponseDTO login(@RequestBody AuthRequestDTO authRequestDTO) {
         return authService.login(authRequestDTO);
+    }
+
+    @PostMapping("/activate")
+    public ResponseEntity<String> activate(@RequestBody ActivationRequest activationRequest) {
+        return new ResponseEntity<>(authService.activate(activationRequest), HttpStatus.OK);
     }
 }
