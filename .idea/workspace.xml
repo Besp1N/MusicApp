@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="de1fa426-1ede-494a-9e5b-30bc3476ee29" name="Changes" comment="rebuild project">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2jN42uMaoIJ1Ron48tEKKLQnsYI" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.MusicAppApplicationTests.contextLoads.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MusicAppApplicationTests.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;database.data.extractors.current.export.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;database.data.extractors.current.id&quot;: &quot;Comma-separated (CSV)_id&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refactorisation&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kacperkarabinowski/IdeaProjects/MusicApp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/backend" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.MusicAppApplicationTests">
+    <configuration name="MusicAppApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MusicApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kacper.musicapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kacper.musicapp" />
+      <option name="MAIN_CLASS_NAME" value="com.kacper.musicapp.MusicAppApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MusicAppApplicationTests.contextLoads" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="MusicApp" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.kacper.musicapp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.kacper.musicapp" />
+      <option name="MAIN_CLASS_NAME" value="com.kacper.musicapp.MusicAppApplicationTests" />
+      <option name="METHOD_NAME" value="contextLoads" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MusicAppApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="MusicApp" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.kacper.musicapp.MusicAppApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.MusicAppApplicationTests" />
+        <item itemvalue="JUnit.MusicAppApplicationTests.contextLoads" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="de1fa426-1ede-494a-9e5b-30bc3476ee29" name="Changes" comment="" />
+      <created>1721213998016</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721213998016</updated>
+      <workItem from="1721213999108" duration="5802000" />
+      <workItem from="1721225579753" duration="5413000" />
+      <workItem from="1721294441023" duration="15618000" />
+      <workItem from="1721321205360" duration="2132000" />
+      <workItem from="1721378938222" duration="11773000" />
+      <workItem from="1721496222262" duration="1534000" />
+      <workItem from="1721636137388" duration="14767000" />
+      <workItem from="1721728844792" duration="15145000" />
+      <workItem from="1721836843339" duration="2914000" />
+      <workItem from="1721842279999" duration="624000" />
+      <workItem from="1721940554898" duration="684000" />
+      <workItem from="1721986399074" duration="12624000" />
+      <workItem from="1722103005985" duration="9135000" />
+      <workItem from="1722339187904" duration="3409000" />
+      <workItem from="1722366259691" duration="40000" />
+      <workItem from="1722370498799" duration="1216000" />
+      <workItem from="1722425440966" duration="6160000" />
+      <workItem from="1722505000823" duration="4804000" />
+      <workItem from="1722763675546" duration="2660000" />
+      <workItem from="1722846939955" duration="13751000" />
+      <workItem from="1722878479535" duration="2298000" />
+      <workItem from="1722887212042" duration="173000" />
+      <workItem from="1722887392656" duration="280000" />
+    </task>
+    <task id="LOCAL-00001" summary="added mail sender function">
+      <option name="closed" value="true" />
+      <created>1722849410324</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722849410324</updated>
+    </task>
+    <task id="LOCAL-00002" summary="created user activation functionality">
+      <option name="closed" value="true" />
+      <created>1722853770579</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722853770580</updated>
+    </task>
+    <task id="LOCAL-00003" summary="refactored login auth">
+      <option name="closed" value="true" />
+      <created>1722857234609</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722857234609</updated>
+    </task>
+    <task id="LOCAL-00004" summary="minor changes">
+      <option name="closed" value="true" />
+      <created>1722858543782</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1722858543782</updated>
+    </task>
+    <task id="LOCAL-00005" summary="rebuild project">
+      <option name="closed" value="true" />
+      <created>1722887710672</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722887710673</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added mail sender function" />
+    <MESSAGE value="created user activation functionality" />
+    <MESSAGE value="refactored login auth" />
+    <MESSAGE value="minor changes" />
+    <MESSAGE value="rebuild project" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebuild project" />
+  </component>
+</project>
