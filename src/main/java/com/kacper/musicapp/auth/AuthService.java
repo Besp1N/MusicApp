@@ -1,5 +1,7 @@
 package com.kacper.musicapp.auth;
 
+import com.kacper.musicapp.exception.InvalidCredentialsException;
+import com.kacper.musicapp.exception.ResourceNotFoundException;
 import com.kacper.musicapp.exception.UserNotEnabledException;
 import com.kacper.musicapp.jwt.JWTService;
 import com.kacper.musicapp.mail.MailService;
@@ -11,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.security.sasl.AuthenticationException;
 import java.security.SecureRandom;
 
 @Service
@@ -58,16 +61,21 @@ public class AuthService
     }
 
     public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
-        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow();
+        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow(
+                () -> new ResourceNotFoundException("User not found"));
 
         if (!user.isEnabled()) {
             throw new UserNotEnabledException("Verify your email");
         }
 
-        authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.email(), authRequestDTO.password()));
-        String token = jwtService.generateToken(user);
+        try {
+            authenticationManager
+                    .authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.email(), authRequestDTO.password()));
+        } catch (Exception e) {
+            throw new InvalidCredentialsException("Invalid credentials");
+        }
 
+        String token = jwtService.generateToken(user);
         return AuthResponseDTO.builder()
                 .email(user.getEmail())
                 .token(token)
