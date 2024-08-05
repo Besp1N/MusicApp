@@ -2,6 +2,7 @@ package com.kacper.musicapp.auth;
 
 import com.kacper.musicapp.exception.InvalidCredentialsException;
 import com.kacper.musicapp.exception.ResourceNotFoundException;
+import com.kacper.musicapp.exception.UserAlreadyExistException;
 import com.kacper.musicapp.exception.UserNotEnabledException;
 import com.kacper.musicapp.jwt.JWTService;
 import com.kacper.musicapp.mail.MailService;
@@ -54,10 +55,13 @@ public class AuthService
                 .activationCode(generateActivationCode())
                 .build();
 
-        User savedUser = userRepository.save(user);
-
-        mailService.sendActivationCode(savedUser.getEmail(), savedUser.getActivationCode());
-        return authResponseMapper.apply(savedUser);
+        try {
+            User savedUser = userRepository.save(user);
+//            mailService.sendActivationCode(savedUser.getEmail(), savedUser.getActivationCode());
+            return authResponseMapper.apply(savedUser);
+        } catch (Exception e) {
+            throw new UserAlreadyExistException("User already exist");
+        }
     }
 
     public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
