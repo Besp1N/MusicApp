@@ -1,6 +1,8 @@
 package com.kacper.musicapp.auth;
 
+import com.kacper.musicapp.exception.UserNotEnabledException;
 import com.kacper.musicapp.jwt.JWTService;
+import com.kacper.musicapp.mail.MailService;
 import com.kacper.musicapp.user.User;
 import com.kacper.musicapp.user.UserRepository;
 import com.kacper.musicapp.utils.Debug;
@@ -19,13 +21,22 @@ public class AuthService
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JWTService jwtService;
+    private final MailService mailService;
 
-    public AuthService(UserRepository userRepository, AuthResponseMapper authResponseMapper, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JWTService jwtService) {
+    public AuthService(
+            UserRepository userRepository,
+            AuthResponseMapper authResponseMapper,
+            PasswordEncoder passwordEncoder,
+            AuthenticationManager authenticationManager,
+            JWTService jwtService,
+            MailService mailService
+    ) {
         this.userRepository = userRepository;
         this.authResponseMapper = authResponseMapper;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtService = jwtService;
+        this.mailService = mailService;
     }
 
     public AuthResponseDTO register(AuthRequestDTO authRequestDTO) {
@@ -41,13 +52,20 @@ public class AuthService
                 .build();
 
         User savedUser = userRepository.save(user);
+
+        mailService.sendActivationCode(savedUser.getEmail(), savedUser.getActivationCode());
         return authResponseMapper.apply(savedUser);
     }
 
     public AuthResponseDTO login(AuthRequestDTO authRequestDTO) {
+        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow();
+
+        if (!user.isEnabled()) {
+            throw new UserNotEnabledException("Verify your email");
+        }
+
         authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(authRequestDTO.email(), authRequestDTO.password()));
-        User user = userRepository.findByEmail(authRequestDTO.email()).orElseThrow();
         String token = jwtService.generateToken(user);
 
         return AuthResponseDTO.builder()
@@ -56,8 +74,22 @@ public class AuthService
                 .build();
     }
 
+    public String activate(ActivationRequest activationRequest) {
+        User user = userRepository.findByEmail(activationRequest.email()).orElseThrow();
+
+        if (user.getActivationCode().equals(activationRequest.activationCode())) {
+            user.setEnabled(true);
+            userRepository.save(user);
+            return "User activated";
+        }
+
+        return "Invalid activation code";
+    }
+
     private Integer generateActivationCode() {
         SecureRandom random = new SecureRandom();
         return 1000 + random.nextInt(9000);
     }
+
+
 }

@@ -26,4 +26,12 @@ public class MailService
 
         javaMailSender.send(simpleMailMessage);
     }
+
+    public void sendActivationCode(String email, Integer activationCode) {
+        MailStructure mailStructure = new MailStructure();
+        mailStructure.setSubject("Activation code");
+        mailStructure.setMessage("Your activation code is: " + activationCode);
+
+        sendMail(email, mailStructure);
+    }
 }
